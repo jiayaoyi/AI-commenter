@@ -1,11 +1,11 @@
 {
-  "name": "fast-commenter",
-  "displayName": "Fast Commenter",
+  "name": "ai-commenter",
+  "displayName": "AI Commenter",
   "description": "使用 AI 快速为代码添加注释",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jiaya/fast-commenter"
+    "url": "https://github.com/jiayaoyi/AI-commenter"
   },
   "publisher": "jiaya",
   "engines": {
@@ -109,6 +109,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "ai-commenter": "file:",
     "axios": "^1.7.9",
     "comment-parser": "^1.4.1",
     "comment-patterns": "^0.12.2",
