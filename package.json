@@ -1,0 +1,118 @@
+{
+  "name": "fast-commenter",
+  "displayName": "Fast Commenter",
+  "description": "使用 AI 快速为代码添加注释",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiaya/fast-commenter"
+  },
+  "publisher": "jiaya",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:fastCommenter.addComment"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "fastCommenter.addComment",
+        "title": "添加代码注释",
+        "category": "Fast Commenter"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorHasSelection",
+          "command": "fastCommenter.addComment",
+          "group": "modification"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "fastCommenter.addComment",
+        "key": "ctrl+alt+/",
+        "mac": "cmd+alt+/",
+        "when": "editorHasSelection"
+      }
+    ],
+    "configuration": {
+      "title": "Fast Commenter",
+      "properties": {
+        "fastCommenter.author": {
+          "type": "string",
+          "default": "",
+          "description": "代码作者名称"
+        },
+        "fastCommenter.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API Key",
+          "scope": "machine"
+        },
+        "fastCommenter.model": {
+          "type": "string",
+          "enum": [
+            "gpt-3.5-turbo",
+            "gpt-4"
+          ],
+          "default": "gpt-3.5-turbo",
+          "description": "选择使用的模型"
+        },
+        "fastCommenter.temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2,
+          "default": 0.7,
+          "description": "生成结果的随机性 (0-2)"
+        },
+        "fastCommenter.maxTokens": {
+          "type": "number",
+          "default": 150,
+          "description": "生成的最大 token 数量"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "build": "tsc -p ./",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint \"src/**/*.{js,ts}\"",
+    "lint:fix": "eslint \"src/**/*.{js,ts}\" --fix",
+    "test": "vscode-test",
+    "package": "vsce package",
+    "install-local": "code --install-extension fast-commenter-0.0.1.vsix"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.17.11",
+    "@types/vscode": "^1.93.0",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "comment-parser": "^1.4.1",
+    "comment-patterns": "^0.12.2",
+    "fast-commenter": "file:",
+    "openai": "^3.3.0"
+  }
+}
